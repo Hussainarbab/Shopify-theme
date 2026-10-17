@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Product photo unavailable</title>
+  <desc id="desc">A simple tech accessory placeholder graphic.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f4f7fb"/>
+      <stop offset="1" stop-color="#e3ebf7"/>
+    </linearGradient>
+    <linearGradient id="device" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff"/>
+      <stop offset="1" stop-color="#bfd1ea"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="1100" fill="url(#background)"/>
+  <circle cx="740" cy="280" r="205" fill="#dce8ff"/>
+  <circle cx="740" cy="280" r="145" fill="none" stroke="#bed2f1" stroke-width="3"/>
+  <ellipse cx="500" cy="815" rx="225" ry="45" fill="#9caec6" opacity=".26"/>
+  <g transform="translate(335 330)">
+    <rect width="330" height="430" rx="54" fill="url(#device)" stroke="#aec1dc" stroke-width="7"/>
+    <rect x="28" y="31" width="274" height="349" rx="38" fill="#eaf0f8"/>
+    <path d="M85 273c53-115 113-138 191-182v250H85z" fill="#d3e1f4"/>
+    <path d="M94 293c51-58 105-91 173-115" fill="none" stroke="#3978ff" stroke-width="17" stroke-linecap="round"/>
+    <circle cx="165" cy="403" r="12" fill="#93a9c7"/>
+  </g>
+  <text x="500" y="965" text-anchor="middle" fill="#52627a" font-family="Arial,sans-serif" font-size="30">Product photo coming soon</text>
+</svg>

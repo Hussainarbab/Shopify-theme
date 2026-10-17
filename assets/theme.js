@@ -1,4 +1,19 @@
 (() => {
+  document.querySelectorAll('img[data-image-fallback]').forEach((image) => {
+    image.addEventListener('error', () => {
+      if (image.dataset.fallbackUsed === 'true') return;
+      image.dataset.fallbackUsed = 'true';
+      image.removeAttribute('srcset');
+      image.src = image.dataset.imageFallback;
+      image.classList.add('product-image--representative');
+      const note = image.parentElement.querySelector('[data-image-note]');
+      if (note) {
+        note.hidden = false;
+        note.textContent = 'Illustrative photo';
+      }
+    }, { once: true });
+  });
+
   const menuToggle = document.querySelector('[data-menu-toggle]');
   const mobileMenu = document.querySelector('[data-mobile-menu]');
   if (menuToggle && mobileMenu) {

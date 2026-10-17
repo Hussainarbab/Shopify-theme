@@ -25,10 +25,16 @@
   {% assign image_asset = 'product-phone.jpg' %}
 {% endif %}
 
-{% if item.featured_image != blank %}
-  {{ item.featured_image | image_url: width: image_width | image_tag: class: class, widths: image_widths, loading: loading, alt: item.featured_image.alt | default: item.title }}
+{% assign fallback_asset = image_asset | default: 'product-fallback.svg' %}
+{% assign fallback_url = fallback_asset | asset_url %}
+{% assign preferred_image = media_image | default: item.featured_image %}
+
+{% if preferred_image != blank %}
+  {{ preferred_image | image_url: width: image_width | image_tag: class: class, widths: image_widths, loading: loading, alt: preferred_image.alt | default: item.title, data-image-fallback: fallback_url }}
+  <span class="product-image-note" data-image-note hidden>Image preview</span>
 {% elsif image_asset != blank %}
-  <img class="{{ class }}" src="{{ image_asset | asset_url }}" alt="{{ item.title | escape }} — representative {{ item.type | default: 'tech accessory' | escape }} photo" width="1000" height="1100" loading="{{ loading | default: 'lazy' }}">
+  <img class="{{ class }} product-image--representative" src="{{ image_asset | asset_url }}" alt="{{ item.title | escape }} — representative {{ item.type | default: 'tech accessory' | escape }} photo" width="1000" height="1100" loading="{{ loading | default: 'lazy' }}">
+  <span class="product-image-note">Illustrative photo</span>
 {% else %}
   {% render 'product-placeholder', title: item.title, class: class %}
 {% endif %}
