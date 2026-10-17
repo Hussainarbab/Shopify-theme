@@ -1,0 +1,34 @@
+{% assign item = product %}
+{% capture product_context %}{{ item.title }} {{ item.type }} {{ item.tags | join: ' ' }}{% endcapture %}
+{% assign product_context = product_context | downcase %}
+{% assign image_asset = '' %}
+
+{% if product_context contains 'earbud' or product_context contains 'airpod' %}
+  {% assign image_asset = 'product-earbuds.jpg' %}
+{% elsif product_context contains 'headphone' or product_context contains 'headset' %}
+  {% assign image_asset = 'product-headphones.jpg' %}
+{% elsif product_context contains 'keyboard' %}
+  {% assign image_asset = 'product-keyboard.jpg' %}
+{% elsif product_context contains 'mouse' %}
+  {% assign image_asset = 'product-mouse.jpg' %}
+{% elsif product_context contains 'power bank' or product_context contains 'powerbank' or product_context contains 'portable battery' %}
+  {% assign image_asset = 'product-powerbank.jpg' %}
+{% elsif product_context contains 'stand' %}
+  {% assign image_asset = 'product-phone-stand.jpg' %}
+{% elsif product_context contains 'holder' or product_context contains 'mount' %}
+  {% assign image_asset = 'product-phone-holder.jpg' %}
+{% elsif product_context contains 'cable' or product_context contains 'usb-c' or product_context contains 'usb c' or product_context contains 'charging wire' %}
+  {% assign image_asset = 'product-usbc-cable.jpg' %}
+{% elsif product_context contains 'charger' or product_context contains 'adapter' or product_context contains 'adaptor' %}
+  {% assign image_asset = 'product-charger.jpg' %}
+{% elsif product_context contains 'phone' or product_context contains 'mobile' or product_context contains 'smartphone' %}
+  {% assign image_asset = 'product-phone.jpg' %}
+{% endif %}
+
+{% if item.featured_image != blank %}
+  {{ item.featured_image | image_url: width: image_width | image_tag: class: class, widths: image_widths, loading: loading, alt: item.featured_image.alt | default: item.title }}
+{% elsif image_asset != blank %}
+  <img class="{{ class }}" src="{{ image_asset | asset_url }}" alt="{{ item.title | escape }} — representative {{ item.type | default: 'tech accessory' | escape }} photo" width="1000" height="1100" loading="{{ loading | default: 'lazy' }}">
+{% else %}
+  {% render 'product-placeholder', title: item.title, class: class %}
+{% endif %}

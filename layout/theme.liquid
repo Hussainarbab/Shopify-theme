@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" data-currency="{{ cart.currency.iso_code | default: shop.currency }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_navy }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+    {% if page_description != blank %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+    {% render 'meta-tags' %}
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <style>
+      :root {
+        --color-navy: {{ settings.color_navy }};
+        --color-blue: {{ settings.color_blue }};
+        --color-ink: {{ settings.color_ink }};
+        --color-muted: {{ settings.color_muted }};
+        --color-surface: {{ settings.color_surface }};
+        --color-accent: {{ settings.color_accent }};
+        --page-width: {{ settings.page_width }}px;
+        --body-font: {{ settings.body_font.family | default: 'DM Sans' | json }}, sans-serif;
+        --heading-font: {{ settings.heading_font.family | default: 'Manrope' | json }}, sans-serif;
+      }
+      {{ settings.body_font | font_face }}
+      {{ settings.heading_font | font_face }}
+    </style>
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ content_for_header }}
+    <script>document.documentElement.classList.remove('no-js');</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#MainContent">Skip to content</a>
+    {% sections 'header-group' %}
+    <main id="MainContent" role="main" tabindex="-1">{{ content_for_layout }}</main>
+    {% sections 'footer-group' %}
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  </body>
+</html>

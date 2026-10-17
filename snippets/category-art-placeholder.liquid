@@ -1,0 +1,18 @@
+<svg class="category-card__image category-placeholder" viewBox="0 0 800 900" role="img" aria-label="{{ title | escape }} category image placeholder" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="category-bg-{{ section.id }}-{{ placeholder_id }}" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#102748"/>
+      <stop offset="1" stop-color="#3978ff"/>
+    </linearGradient>
+    <filter id="category-shadow-{{ section.id }}-{{ placeholder_id }}" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+  </defs>
+  <rect width="800" height="900" fill="url(#category-bg-{{ section.id }}-{{ placeholder_id }})"/>
+  <circle cx="600" cy="210" r="205" fill="#7caeff" opacity=".16"/>
+  <circle cx="600" cy="210" r="150" fill="none" stroke="#c0d8ff" stroke-opacity=".2" stroke-width="2"/>
+  <ellipse cx="408" cy="681" rx="188" ry="32" fill="#041023" opacity=".35" filter="url(#category-shadow-{{ section.id }}-{{ placeholder_id }})"/>
+  <path d="M280 345h230l-45 205H325z" fill="#f4f7fb" opacity=".9"/>
+  <path d="M305 523h180l76 99H228z" fill="#c0d8ff" opacity=".95"/>
+  <text x="400" y="742" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="24">Add a collection photo</text>
+</svg>

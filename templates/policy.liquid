@@ -1,0 +1,11 @@
+<section class="content-page page-width">
+  <header class="content-page__header">
+    <p class="eyebrow">STORE POLICY</p>
+    {% # theme-check-disable UndefinedObject %}
+    <h1>{{ policy.title | escape }}</h1>
+  </header>
+  <div class="content-page__body rte">
+    {{ policy.body }}
+    {% # theme-check-enable UndefinedObject %}
+  </div>
+</section>

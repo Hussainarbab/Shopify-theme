@@ -1,0 +1,6 @@
+<section class="error-page page-width">
+  <span class="error-page__code">404</span><p class="eyebrow">SIGNAL LOST</p><h1>Well, this is a little awkward.</h1><p>The page you’re looking for may have moved or doesn’t exist. Let’s get you back on track.</p>
+  <a class="button button--primary" href="{{ routes.root_url }}">Back to home <span aria-hidden="true">→</span></a>
+  <form action="{{ routes.search_url }}" method="get" role="search" class="search-form"><label for="NotFoundSearch" class="visually-hidden">Search</label><input id="NotFoundSearch" type="search" name="q" placeholder="Try searching instead"><button class="button button--outline" type="submit">Search</button></form>
+</section>
+{% schema %}{"name":"404 page"}{% endschema %}

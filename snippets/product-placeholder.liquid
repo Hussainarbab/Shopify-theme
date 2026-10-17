@@ -1,0 +1,27 @@
+<svg class="{{ class }}" viewBox="0 0 720 780" role="img" aria-label="Product image coming soon for {{ title | default: 'this item' | escape }}" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="product-bg-{{ section.id }}-{{ title | handle }}" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f4f7fb"/>
+      <stop offset="1" stop-color="#e7eef9"/>
+    </linearGradient>
+    <linearGradient id="product-object-{{ section.id }}-{{ title | handle }}" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff"/>
+      <stop offset="1" stop-color="#c9d8ed"/>
+    </linearGradient>
+    <filter id="product-shadow-{{ section.id }}-{{ title | handle }}" x="-40%" y="-40%" width="180%" height="200%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+  <rect width="720" height="780" rx="24" fill="url(#product-bg-{{ section.id }}-{{ title | handle }})"/>
+  <circle cx="552" cy="175" r="132" fill="#dce8ff"/>
+  <circle cx="552" cy="175" r="94" fill="none" stroke="#c0d4fa" stroke-width="2"/>
+  <ellipse cx="355" cy="620" rx="170" ry="28" fill="#90a9cc" opacity=".3" filter="url(#product-shadow-{{ section.id }}-{{ title | handle }})"/>
+  <g transform="translate(235 196)">
+    <rect x="30" y="30" width="190" height="310" rx="32" fill="url(#product-object-{{ section.id }}-{{ title | handle }})" stroke="#a8bbd6" stroke-width="4"/>
+    <rect x="48" y="55" width="154" height="250" rx="20" fill="#edf3fb"/>
+    <path d="M77 206c26-76 64-93 105-113v212H77z" fill="#dbe7f8"/>
+    <path d="M85 218c27-37 60-54 97-69" fill="none" stroke="#3978ff" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="125" cy="322" r="6" fill="#94a8c5"/>
+  </g>
+  <text x="360" y="710" text-anchor="middle" fill="#687487" font-family="Arial,sans-serif" font-size="22">Product image coming soon</text>
+</svg>

@@ -1,0 +1,20 @@
+<section class="search-page page-width">
+  <header class="content-page__header"><p class="eyebrow">FIND YOUR NEXT FAVOURITE</p><h1>Search</h1></header>
+  <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+    <label for="SearchInput" class="visually-hidden">Search products and pages</label><input id="SearchInput" type="search" name="q" value="{{ search.terms | escape }}" placeholder="What are you looking for?" autocomplete="off">
+    <input type="hidden" name="options[prefix]" value="last"><button class="button button--primary" type="submit">Search <span aria-hidden="true">→</span></button>
+  </form>
+  {% if search.performed %}
+    <p class="search-result-count">{% if search.results_count == 0 %}No results{% else %}{{ search.results_count }} results{% endif %} for “{{ search.terms | escape }}”</p>
+    {% paginate search.results by 16 %}
+      {% if search.results.size > 0 %}
+        <div class="product-grid search-results">{% for item in search.results %}
+          {% if item.object_type == 'product' %}{% render 'product-card', product: item %}
+          {% else %}<article class="search-page-card"><p class="eyebrow">{{ item.object_type | capitalize }}</p><h2><a href="{{ item.url }}">{{ item.title | escape }}</a></h2><p>{{ item.content | strip_html | truncate: 150 }}</p></article>{% endif %}
+        {% endfor %}</div>
+      {% else %}<div class="empty-state"><h2>No matches this time</h2><p>Try a different search, or browse all of our tech accessories.</p><a class="button button--primary" href="{{ routes.all_products_collection_url }}">Browse all products</a></div>{% endif %}
+      {% if paginate.pages > 1 %}<nav class="pagination" aria-label="Pagination">{% if paginate.previous %}<a href="{{ paginate.previous.url }}">← Previous</a>{% endif %}<span>Page {{ paginate.current_page }} of {{ paginate.pages }}</span>{% if paginate.next %}<a href="{{ paginate.next.url }}">Next →</a>{% endif %}</nav>{% endif %}
+    {% endpaginate %}
+  {% else %}<p class="search-help">Search by product name, category, or what you need.</p>{% endif %}
+</section>
+{% schema %}{"name":"Search results","settings":[{"type":"checkbox","id":"show_vendor","label":"Show vendor","default":false}]}{% endschema %}

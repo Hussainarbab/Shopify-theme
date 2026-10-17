@@ -1,0 +1,54 @@
+<header class="site-header" data-header>
+  <div class="page-width header__inner">
+    <button class="icon-button header__menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="MobileMenu" data-menu-toggle><span class="menu-icon" aria-hidden="true"></span></button>
+    <a class="brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">
+      {% if section.settings.logo != blank %}
+        {{ section.settings.logo | image_url: width: 360 | image_tag: class: 'brand__image', widths: '120, 180, 240, 360', alt: shop.name }}
+      {% else %}
+        <span class="brand__mark" aria-hidden="true">T</span><span class="brand__word">{{ section.settings.brand_name | escape }}<span>.</span></span>
+      {% endif %}
+    </a>
+    {% assign has_shop_link = false %}
+    {% assign has_about_link = false %}
+    {% assign has_faq_link = false %}
+    {% assign has_contact_link = false %}
+    {% for link in section.settings.menu.links %}
+      {% if link.url contains '/collections/' %}{% assign has_shop_link = true %}{% endif %}
+      {% if link.url contains '/pages/about' %}{% assign has_about_link = true %}{% endif %}
+      {% if link.url contains '/pages/faq' %}{% assign has_faq_link = true %}{% endif %}
+      {% if link.url contains '/pages/contact' %}{% assign has_contact_link = true %}{% endif %}
+    {% endfor %}
+    <nav class="desktop-nav" aria-label="Main navigation">
+      {% for link in section.settings.menu.links %}
+        <a href="{{ link.url }}" class="nav-link{% if link.active %} is-active{% endif %}">{{ link.title | escape }}</a>
+      {% endfor %}
+      {% unless has_shop_link %}<a href="{{ routes.all_products_collection_url }}" class="nav-link">Shop all</a>{% endunless %}
+      {% unless has_about_link %}<a href="{{ routes.root_url }}pages/about" class="nav-link">About us</a>{% endunless %}
+      {% unless has_faq_link %}<a href="{{ routes.root_url }}pages/faq" class="nav-link">FAQ</a>{% endunless %}
+      {% unless has_contact_link %}<a href="{{ routes.root_url }}pages/contact" class="nav-link">Contact</a>{% endunless %}
+    </nav>
+    <div class="header__actions">
+      <a class="icon-button header-search" href="{{ routes.search_url }}" aria-label="Search">{% render 'icon', name: 'search' %}</a>
+      {% if shop.customer_accounts_enabled %}<a class="icon-button header-account" href="{{ routes.account_url }}" aria-label="Account">{% render 'icon', name: 'account' %}</a>{% endif %}
+      <a class="icon-button cart-link" href="{{ routes.cart_url }}" aria-label="Cart, {{ cart.item_count }} items">{% render 'icon', name: 'bag' %}<span class="cart-count" data-cart-count>{{ cart.item_count }}</span></a>
+    </div>
+  </div>
+  <nav id="MobileMenu" class="mobile-menu" aria-label="Mobile navigation" hidden data-mobile-menu>
+    {% for link in section.settings.menu.links %}<a href="{{ link.url }}">{{ link.title | escape }}<span aria-hidden="true">→</span></a>{% endfor %}
+    {% unless has_shop_link %}<a href="{{ routes.all_products_collection_url }}">Shop all<span aria-hidden="true">→</span></a>{% endunless %}
+    {% unless has_about_link %}<a href="{{ routes.root_url }}pages/about">About us<span aria-hidden="true">→</span></a>{% endunless %}
+    {% unless has_faq_link %}<a href="{{ routes.root_url }}pages/faq">FAQ<span aria-hidden="true">→</span></a>{% endunless %}
+    {% unless has_contact_link %}<a href="{{ routes.root_url }}pages/contact">Contact<span aria-hidden="true">→</span></a>{% endunless %}
+    <a href="{{ routes.search_url }}">Search<span aria-hidden="true">→</span></a>
+  </nav>
+</header>
+{% schema %}
+{
+  "name":"Header",
+  "settings":[
+    {"type":"image_picker","id":"logo","label":"Logo"},
+    {"type":"text","id":"brand_name","label":"Brand name","default":"TechNest"},
+    {"type":"link_list","id":"menu","label":"Menu","default":"main-menu"}
+  ]
+}
+{% endschema %}

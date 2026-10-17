@@ -1,0 +1,16 @@
+{% if request.page_type == 'product' %}
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="{{ product.title | escape }}">
+  <meta property="og:description" content="{{ product.description | strip_html | truncate: 160 | escape }}">
+  {% if product.featured_image %}<meta property="og:image" content="https:{{ product.featured_image | image_url: width: 1200 }}">{% endif %}
+{% elsif request.page_type == 'collection' %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ collection.title | escape }}">
+  <meta property="og:description" content="{{ collection.description | strip_html | truncate: 160 | escape }}">
+{% else %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  {% if page_description %}<meta property="og:description" content="{{ page_description | escape }}">{% endif %}
+{% endif %}
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:site_name" content="{{ shop.name | escape }}">

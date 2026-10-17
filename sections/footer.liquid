@@ -1,0 +1,43 @@
+<footer class="site-footer">
+  <div class="page-width footer-main">
+    <div class="footer-brand">
+      <a class="brand brand--footer" href="{{ routes.root_url }}"><span class="brand__mark" aria-hidden="true">T</span><span class="brand__word">{{ section.settings.brand_name | escape }}<span>.</span></span></a>
+      <p>{{ section.settings.footer_text | escape }}</p>
+      <div class="footer-social">
+        {% if settings.instagram_url != blank %}<a href="{{ settings.instagram_url }}" rel="me noopener" target="_blank">Instagram</a>{% endif %}
+        {% if settings.facebook_url != blank %}<a href="{{ settings.facebook_url }}" rel="me noopener" target="_blank">Facebook</a>{% endif %}
+      </div>
+    </div>
+    <div class="footer-column"><h2>Explore</h2>{% for link in section.settings.menu.links %}<a href="{{ link.url }}">{{ link.title | escape }}</a>{% endfor %}</div>
+    <div class="footer-column"><h2>Help &amp; policies</h2>
+      {% if section.settings.help_menu != blank %}
+        {% for link in section.settings.help_menu.links %}<a href="{{ link.url }}">{{ link.title | escape }}</a>{% endfor %}
+      {% else %}
+        <a href="{{ routes.root_url }}pages/faq">Frequently asked questions</a><a href="{{ routes.root_url }}pages/shipping">Shipping &amp; delivery</a><a href="{{ routes.root_url }}pages/returns">Returns &amp; refunds</a><a href="{{ routes.root_url }}pages/contact">Contact us</a>
+      {% endif %}
+      {% if shop.policies.privacy_policy %}<a href="{{ shop.policies.privacy_policy.url }}">Privacy policy</a>{% endif %}
+      {% if shop.policies.terms_of_service %}<a href="{{ shop.policies.terms_of_service.url }}">Terms of service</a>{% endif %}
+    </div>
+    <div class="footer-column footer-newsletter"><h2>{{ section.settings.newsletter_heading | escape }}</h2><p>{{ section.settings.newsletter_text | escape }}</p>
+      {% form 'customer', class: 'newsletter-form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <label class="visually-hidden" for="FooterEmail">Email address</label>
+        <div class="newsletter-form__row"><input id="FooterEmail" type="email" name="contact[email]" value="{{ form.email }}" placeholder="Your email address" autocomplete="email" required><button type="submit" aria-label="Subscribe">→</button></div>
+        {% if form.posted_successfully? %}<p class="form-status" tabindex="-1">Thanks for subscribing.</p>{% endif %}
+        {% if form.errors %}<div class="form-status" role="alert">{{ form.errors | default_errors }}</div>{% endif %}
+      {% endform %}
+    </div>
+  </div>
+  <div class="footer-bottom page-width"><span>© {{ 'now' | date: '%Y' }} {{ shop.name | escape }}. All rights reserved.</span><span>Made for the way you connect.</span></div>
+</footer>
+{% schema %}
+{"name":"Footer","settings":[
+  {"type":"text","id":"brand_name","label":"Brand name","default":"TechNest"},
+  {"type":"textarea","id":"footer_text","label":"Footer description","default":"Everyday tech, thoughtfully chosen. Discover useful accessories that make your devices work better."},
+  {"type":"link_list","id":"menu","label":"Explore menu","default":"main-menu"},
+  {"type":"link_list","id":"help_menu","label":"Help menu"},
+  {"type":"text","id":"newsletter_heading","label":"Newsletter heading","default":"A little more signal."},
+  {"type":"text","id":"newsletter_text","label":"Newsletter text","default":"New finds, useful tips, and occasional offers. No noise."},
+  {"type":"paragraph","content":"Set social links in Theme settings > Business contact."}
+]}
+{% endschema %}

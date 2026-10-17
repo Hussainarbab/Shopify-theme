@@ -1,0 +1,13 @@
+<section class="content-page information-page page-width">
+  <header class="content-page__header"><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h1>{{ section.settings.heading | escape }}</h1><p>{{ section.settings.intro | escape }}</p></header>
+  <div class="content-page__body rte">{{ section.settings.content }}</div>
+  <p class="policy-reminder">This is editable starter content. Please review and tailor it to your actual business operations before publishing.</p>
+</section>
+{% schema %}
+{"name":"Information page","settings":[
+  {"type":"text","id":"eyebrow","label":"Eyebrow","default":"THE DETAILS"},
+  {"type":"text","id":"heading","label":"Heading","default":"Information"},
+  {"type":"textarea","id":"intro","label":"Intro"},
+  {"type":"richtext","id":"content","label":"Page content","default":"<h2>Helpful information</h2><p>Update this page with accurate details about your store before publishing.</p>"}
+]}
+{% endschema %}

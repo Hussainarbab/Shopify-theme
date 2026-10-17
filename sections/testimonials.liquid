@@ -1,0 +1,16 @@
+<section class="section testimonials-section">
+  <div class="page-width">
+    <div class="section-heading section-heading--center"><div><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h2>{{ section.settings.heading | escape }}</h2><p class="sample-note">Sample testimonials — replace with verified customer reviews before publishing.</p></div></div>
+    <div class="testimonial-grid">{% for block in section.blocks %}<figure class="testimonial-card" {{ block.shopify_attributes }}><div class="testimonial-card__stars" aria-label="Sample rating">{{ block.settings.stars | escape }}</div><blockquote>“{{ block.settings.quote | escape }}”</blockquote><figcaption><span class="testimonial-avatar">{{ block.settings.name | slice: 0 | upcase }}</span><span><strong>{{ block.settings.name | escape }}</strong><small>Sample review</small></span></figcaption></figure>{% endfor %}</div>
+  </div>
+</section>
+{% schema %}
+{"name":"Sample testimonials","settings":[
+  {"type":"text","id":"eyebrow","label":"Eyebrow","default":"KIND WORDS"},
+  {"type":"text","id":"heading","label":"Heading","default":"Good things, said simply"}
+],"blocks":[{"type":"quote","name":"Sample review","settings":[
+  {"type":"textarea","id":"quote","label":"Review","default":"A simple little upgrade that made my desk setup feel so much better."},
+  {"type":"text","id":"name","label":"Name","default":"Ayesha K."},
+  {"type":"text","id":"stars","label":"Stars","default":"★★★★★"}
+]}],"max_blocks":3,"presets":[{"name":"Sample testimonials","blocks":[{"type":"quote"},{"type":"quote","settings":{"quote":"The cable feels great and charges my phone quickly. Exactly what I needed.","name":"Hamza R.","stars":"★★★★★"}},{"type":"quote","settings":{"quote":"Really useful accessories and an easy shopping experience.","name":"Sara M.","stars":"★★★★★"}}]}]}
+{% endschema %}

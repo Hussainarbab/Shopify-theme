@@ -1,0 +1,15 @@
+<section class="newsletter-section"><div class="page-width newsletter-section__inner"><div><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h2>{{ section.settings.heading | escape }}</h2><p>{{ section.settings.text | escape }}</p></div>
+  {% form 'customer', class: 'newsletter-form newsletter-form--large' %}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+    <label class="visually-hidden" for="NewsletterEmail-{{ section.id }}">Email address</label>
+    <div class="newsletter-form__row"><input id="NewsletterEmail-{{ section.id }}" type="email" name="contact[email]" value="{{ form.email }}" placeholder="you@example.com" autocomplete="email" required><button type="submit" class="button button--primary">Sign me up <span aria-hidden="true">→</span></button></div>
+    {% if form.posted_successfully? %}<p class="form-status" tabindex="-1">Thanks for subscribing.</p>{% endif %}{% if form.errors %}<div class="form-status" role="alert">{{ form.errors | default_errors }}</div>{% endif %}
+  {% endform %}
+</div></section>
+{% schema %}
+{"name":"Newsletter","settings":[
+  {"type":"text","id":"eyebrow","label":"Eyebrow","default":"STAY IN THE LOOP"},
+  {"type":"text","id":"heading","label":"Heading","default":"A little more signal."},
+  {"type":"textarea","id":"text","label":"Text","default":"Get the occasional note about new arrivals, practical tech tips, and good finds."}
+],"presets":[{"name":"Newsletter"}]}
+{% endschema %}

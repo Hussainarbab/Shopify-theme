@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "hero": {"type":"hero","settings":{}},
+    "categories": {"type":"category-list","blocks":{
+      "category_1":{"type":"category","settings":{"title":"Phone stands","subtitle":"Find your best angle"}},
+      "category_2":{"type":"category","settings":{"title":"Charging","subtitle":"Power through the day"}},
+      "category_3":{"type":"category","settings":{"title":"Audio","subtitle":"Tune into your world"}},
+      "category_4":{"type":"category","settings":{"title":"Everyday carry","subtitle":"Smart tools, on the go"}}
+    },"block_order":["category_1","category_2","category_3","category_4"],"settings":{}},
+    "best_sellers": {"type":"featured-collection","settings":{"eyebrow":"MOST LOVED","heading":"Best sellers","description":"Customer favourites and everyday essentials. Add products to a collection in Shopify to see them here.","products_to_show":4}},
+    "promo": {"type":"promo-banner","settings":{}},
+    "benefits": {"type":"benefits","blocks":{
+      "benefit_1":{"type":"benefit","settings":{"icon":"✦","title":"Thoughtfully picked","text":"Useful accessories selected with real everyday needs in mind."}},
+      "benefit_2":{"type":"benefit","settings":{"icon":"↗","title":"Pakistan-wide delivery","text":"Shipping options and timelines are shown at checkout."}},
+      "benefit_3":{"type":"benefit","settings":{"icon":"♡","title":"Here to help","text":"Have a question? Our team is ready to help you choose."}},
+      "benefit_4":{"type":"benefit","settings":{"icon":"⌁","title":"Easy checkout","text":"A straightforward, secure Shopify-powered checkout."}}
+    },"block_order":["benefit_1","benefit_2","benefit_3","benefit_4"],"settings":{}},
+    "featured": {"type":"featured-collection","settings":{"eyebrow":"THE EVERYDAY EDIT","heading":"A little something useful","description":"Thoughtful accessories for wherever the day takes you.","products_to_show":4}},
+    "reviews": {"type":"testimonials","blocks":{
+      "review_1":{"type":"quote","settings":{"quote":"A simple little upgrade that made my desk setup feel so much better.","name":"Ayesha K.","stars":"★★★★★"}},
+      "review_2":{"type":"quote","settings":{"quote":"The cable feels great and charges my phone quickly. Exactly what I needed.","name":"Hamza R.","stars":"★★★★★"}},
+      "review_3":{"type":"quote","settings":{"quote":"Really useful accessories and an easy shopping experience.","name":"Sara M.","stars":"★★★★★"}}
+    },"block_order":["review_1","review_2","review_3"],"settings":{}},
+    "newsletter": {"type":"newsletter","settings":{}}
+  },
+  "order": ["hero","categories","best_sellers","promo","benefits","featured","reviews","newsletter"]
+}

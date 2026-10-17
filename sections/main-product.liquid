@@ -1,0 +1,52 @@
+<section class="product-page page-width" data-product-root>
+  <div class="product-gallery">
+    <div class="product-gallery__main">
+      {% if product.selected_or_first_available_variant.featured_media %}
+        {{ product.selected_or_first_available_variant.featured_media | image_url: width: 1500 | image_tag: class: 'product-gallery__image', widths: '500, 750, 1000, 1250, 1500', fetchpriority: 'high', alt: product.selected_or_first_available_variant.featured_media.alt | default: product.title }}
+      {% elsif product.featured_media %}
+        {{ product.featured_media | image_url: width: 1500 | image_tag: class: 'product-gallery__image', widths: '500, 750, 1000, 1250, 1500', fetchpriority: 'high', alt: product.featured_media.alt | default: product.title }}
+      {% else %}{% render 'product-image', product: product, class: 'product-gallery__image', image_width: 1500, image_widths: '500, 750, 1000, 1250, 1500', loading: 'eager' %}{% endif %}
+      {% if product.compare_at_price > product.price %}<span class="product-badge product-badge--large">On sale</span>{% endif %}
+    </div>
+    {% if product.media.size > 1 %}<div class="product-gallery__thumbs" aria-label="Product images">{% for media in product.media limit: 6 %}{% if media.media_type == 'image' %}<button class="product-thumb{% if forloop.first %} is-active{% endif %}" type="button" aria-label="View image {{ forloop.index }}" data-gallery-image="{{ media | image_url: width: 1500 }}" data-gallery-srcset="{{ media | image_url: width: 500 }} 500w, {{ media | image_url: width: 900 }} 900w, {{ media | image_url: width: 1500 }} 1500w">
+      {{ media | image_url: width: 200 | image_tag: loading: 'lazy', alt: media.alt | default: product.title }}
+    </button>{% endif %}{% endfor %}</div>{% endif %}
+  </div>
+  <div class="product-info">
+    {% if section.settings.show_vendor and product.vendor != blank %}<p class="eyebrow">{{ product.vendor | escape }}</p>{% endif %}
+    <h1>{{ product.title | escape }}</h1>
+    <div class="product-price price" data-product-price aria-live="polite">
+      <span class="price__current{% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %} price__current--sale{% endif %}" data-current-price>{{ product.selected_or_first_available_variant.price | money }}</span>
+      <s class="price__compare" data-compare-price{% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %} hidden{% endunless %}>{{ product.selected_or_first_available_variant.compare_at_price | money }}</s>
+    </div>
+    <p class="product-availability" data-availability>{% if product.selected_or_first_available_variant.available %}<span class="availability-dot"></span> Available{% else %}<span class="availability-dot availability-dot--out"></span> Currently unavailable{% endif %}</p>
+    {% if product.description != blank %}<div class="product-description rte">{{ product.description }}</div>{% endif %}
+    {% form 'product', product, id: 'ProductForm', class: 'product-form' %}
+      {% unless product.has_only_default_variant %}
+        <label class="field-label" for="VariantSelect-{{ section.id }}">Choose an option</label>
+        <select id="VariantSelect-{{ section.id }}" name="id" class="select-input" data-variant-select>
+          {% for variant in product.variants %}<option value="{{ variant.id }}" data-price="{{ variant.price }}" data-compare="{{ variant.compare_at_price | default: 0 }}" data-available="{{ variant.available }}" data-image="{% if variant.featured_media %}{{ variant.featured_media | image_url: width: 1500 }}{% elsif product.featured_media %}{{ product.featured_media | image_url: width: 1500 }}{% endif %}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>{{ variant.title | escape }}{% unless variant.available %} — Sold out{% endunless %}</option>{% endfor %}
+        </select>
+      {% else %}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" data-variant-select data-price="{{ product.selected_or_first_available_variant.price }}" data-compare="{{ product.selected_or_first_available_variant.compare_at_price | default: 0 }}" data-available="{{ product.selected_or_first_available_variant.available }}" data-image="{% if product.selected_or_first_available_variant.featured_media %}{{ product.selected_or_first_available_variant.featured_media | image_url: width: 1500 }}{% elsif product.featured_media %}{{ product.featured_media | image_url: width: 1500 }}{% endif %}">
+      {% endunless %}
+      <label class="field-label" for="Quantity-{{ section.id }}">Quantity</label>
+      <div class="quantity-control"><button type="button" aria-label="Decrease quantity" data-quantity-minus>−</button><input id="Quantity-{{ section.id }}" name="quantity" type="number" value="1" min="1" step="1" inputmode="numeric" data-quantity-input><button type="button" aria-label="Increase quantity" data-quantity-plus>+</button></div>
+      <button class="button button--primary product-submit" type="submit" name="add" data-add-button {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>{% if product.selected_or_first_available_variant.available %}Add to cart{% else %}Sold out{% endif %} <span aria-hidden="true">→</span></button>
+      {% if section.settings.show_dynamic_checkout %}{{ form | payment_button }}{% endif %}
+      <p class="product-form__message" role="status" aria-live="polite" data-product-message></p>
+    {% endform %}
+    <div class="product-accordions">
+      <details><summary>Specifications</summary><div class="rte">{{ section.settings.specifications | default: 'Product specifications are listed in the description above. Contact us if you need help choosing.' }}</div></details>
+      <details><summary>Shipping &amp; delivery</summary><div class="rte">{{ section.settings.shipping_text | default: 'Delivery options and estimated timing are shown at checkout. Availability may vary by location in Pakistan.' }}</div></details>
+    </div>
+  </div>
+</section>
+{% schema %}
+{"name":"Main product","settings":[
+  {"type":"checkbox","id":"show_vendor","label":"Show vendor","default":false},
+  {"type":"checkbox","id":"show_dynamic_checkout","label":"Show Buy now button","default":true},
+  {"type":"richtext","id":"specifications","label":"Specifications content"},
+  {"type":"richtext","id":"shipping_text","label":"Shipping information"}
+]}
+{% endschema %}

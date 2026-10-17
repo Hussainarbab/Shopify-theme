@@ -1,0 +1,19 @@
+{
+  "current": {
+    "color_navy": "#081629",
+    "color_blue": "#3978ff",
+    "color_ink": "#142033",
+    "color_muted": "#687487",
+    "color_surface": "#f4f7fb",
+    "color_accent": "#dce8ff",
+    "page_width": 1280,
+    "body_font": "assistant_n4",
+    "heading_font": "assistant_n4",
+    "business_email": "",
+    "business_phone": "",
+    "business_address": "",
+    "instagram_url": "",
+    "facebook_url": ""
+  },
+  "presets": {}
+}

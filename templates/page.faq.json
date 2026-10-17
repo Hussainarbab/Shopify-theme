@@ -1,0 +1,7 @@
+{"sections":{"main":{"type":"faq","blocks":{
+  "faq_1":{"type":"faq","settings":{"question":"Where do you deliver?","answer":"<p>Delivery coverage and available shipping options are shown at checkout for your address in Pakistan.</p>"}},
+  "faq_2":{"type":"faq","settings":{"question":"How can I track my order?","answer":"<p>Once your order is dispatched, any tracking information available will be shared using the contact details provided at checkout.</p>"}},
+  "faq_3":{"type":"faq","settings":{"question":"What payment methods can I use?","answer":"<p>Available payment methods are displayed during checkout and may depend on your location and Shopify store settings.</p>"}},
+  "faq_4":{"type":"faq","settings":{"question":"Can I return or exchange an item?","answer":"<p>Please review our return and refund policy for current eligibility and instructions. Contact us before sending an item back.</p>"}},
+  "faq_5":{"type":"faq","settings":{"question":"How do I get product help?","answer":"<p>Use our contact page and include the product name and your question. We’ll do our best to help.</p>"}}
+},"block_order":["faq_1","faq_2","faq_3","faq_4","faq_5"],"settings":{}}},"order":["main"]}

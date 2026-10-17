@@ -1,0 +1,44 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "TechNest",
+    "theme_version": "1.0.0",
+    "theme_author": "TechNest",
+    "theme_documentation_url": "https://help.shopify.com/en/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com/"
+  },
+  {
+    "name": "Brand colors",
+    "settings": [
+      {"type":"color","id":"color_navy","label":"Deep navy","default":"#081629"},
+      {"type":"color","id":"color_blue","label":"Electric blue","default":"#3978ff"},
+      {"type":"color","id":"color_ink","label":"Body text","default":"#142033"},
+      {"type":"color","id":"color_muted","label":"Secondary text","default":"#687487"},
+      {"type":"color","id":"color_surface","label":"Soft background","default":"#f4f7fb"},
+      {"type":"color","id":"color_accent","label":"Accent","default":"#dce8ff"}
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {"type":"font_picker","id":"body_font","label":"Body font","default":"assistant_n4"},
+      {"type":"font_picker","id":"heading_font","label":"Heading font","default":"assistant_n4"}
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {"type":"range","id":"page_width","min":1000,"max":1600,"step":40,"unit":"px","label":"Page width","default":1280}
+    ]
+  },
+  {
+    "name": "Business contact",
+    "settings": [
+      {"type":"text","id":"business_email","label":"Business email"},
+      {"type":"text","id":"business_phone","label":"Business phone"},
+      {"type":"textarea","id":"business_address","label":"Business address"},
+      {"type":"url","id":"instagram_url","label":"Instagram URL"},
+      {"type":"url","id":"facebook_url","label":"Facebook URL"}
+    ]
+  }
+]
